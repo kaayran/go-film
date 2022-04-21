@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, flash
-
+from flask import Blueprint, render_template, request, flash, redirect, url_for
+from werkzeug.security import generate_password_hash, check_password_hash
 from website import Session
 from website.models import User
 
@@ -8,6 +8,19 @@ auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        session = Session()
+        user = session.query(User).filter_by(email=email).first()
+        session.close()
+        if user:
+            if check_password_hash(user.password, password):
+                flash('User logged successfully.', category='success')
+                return redirect(url_for('views.home'))
+
+        flash('Incorrect email or/and password.', category='error')
+
     return render_template('login.html')
 
 
@@ -30,10 +43,17 @@ def signup():
             flash('Passwords not the same.', category='error')
             pass
         else:
-            flash('Successful registration of a new user.', category='success')
-            new_user = User(email=email, name=name, password=password)
             session = Session()
-            session.add(new_user)
-            session.commit()
+            user = session.query(User).filter_by(email=email).first()
+            if not user:
+                hashed_password = generate_password_hash(password, method='sha256')
+                new_user = User(email=email, name=name, password=hashed_password)
+                session = Session()
+                session.add(new_user)
+                session.commit()
+                flash('User created successfully.', category='success')
+                return redirect(url_for('views.home'))
+
+            flash('User already exists.', category='error')
 
     return render_template('sign_up.html')

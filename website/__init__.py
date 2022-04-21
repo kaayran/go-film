@@ -1,8 +1,8 @@
 import os
+
 from flask import Flask
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-from sqlalchemy_utils import database_exists, create_database
 
 Base = declarative_base()
 engine = create_engine(os.environ['PS_URL'])
