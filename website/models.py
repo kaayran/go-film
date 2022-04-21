@@ -1,9 +1,10 @@
+from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String
 
 from website import Base
 
 
-class User(Base):
+class User(Base, UserMixin):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
