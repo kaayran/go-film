@@ -6,7 +6,7 @@ from ..db import Session
 from ..models import User
 
 
-def login():
+def get_login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -16,7 +16,7 @@ def login():
             if check_password_hash(user.password, password):
                 flash('User logged successfully.', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('home_views.home', user=current_user))
+                return redirect(url_for('home.index', user=current_user))
 
         session.close()
         flash('Incorrect email or/and password.', category='error')
@@ -24,12 +24,12 @@ def login():
     return render_template('login.html', user=current_user)
 
 
-def logout():
+def get_logout():
     logout_user()
-    return redirect(url_for('auth_views.login', user=current_user))
+    return redirect(url_for('auth.login', user=current_user))
 
 
-def signup():
+def get_signup():
     if request.method == 'POST':
         email = request.form.get('email')
         name = request.form.get('name')
@@ -49,7 +49,7 @@ def signup():
                 session.commit()
                 flash('User created successfully.', category='success')
                 login_user(new_user, remember=True)
-                return redirect(url_for('home_views.home', user=current_user))
+                return redirect(url_for('home.index', user=current_user))
 
             session.close()
             flash('User already exists.', category='error')

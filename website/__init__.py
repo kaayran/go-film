@@ -8,11 +8,13 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 
-    from .views import home_views
-    from .views import auth_views
+    from .views import home
+    from .views import auth
+    from .views import account
 
-    app.register_blueprint(home_views, url_prefix='/')
-    app.register_blueprint(auth_views, url_prefix='/')
+    app.register_blueprint(home, url_prefix='/')
+    app.register_blueprint(auth, url_prefix='/')
+    app.register_blueprint(account, url_prefix='/')
 
     # Import all Database classes here
     from .models import User
@@ -23,7 +25,7 @@ def create_app():
     Base.metadata.create_all(engine)
 
     login_manager = LoginManager()
-    login_manager.login_view = 'auth_views.login'
+    login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
     @login_manager.user_loader
