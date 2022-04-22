@@ -1,7 +1,7 @@
 from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String
 
-from website import Base
+from ..db import Base
 
 
 class User(Base, UserMixin):
