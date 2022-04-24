@@ -1,19 +1,18 @@
 from flask import render_template, url_for, request, redirect
 from flask_login import current_user
 
-from ..parser import get_film_id, get_film_data
+from ..models import Pool
 
 
 def get_profile():
     if request.method == 'POST':
-        url = request.form['url']
-        film_id = get_film_id(url)
-        print(url)
-        print(film_id)
-        film_name, film_poster = get_film_data(film_id)
+        name = request.form['name']
+        number = request.form['number']
+        amount = request.form['amount']
+        count = request.form['count']
 
-
-        print(film_name, film_poster)
+        new_pool = Pool(name=name, number=number, amount=amount, count=count)
+        print(repr(new_pool))
 
         return redirect(url_for('home.index', user=current_user))
 
