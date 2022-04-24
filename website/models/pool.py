@@ -12,7 +12,8 @@ class Pool(Base, UserMixin):
     number = Column(Integer)
     amount = Column(Integer)
     count = Column(Integer)
+    user_id = Column(Integer)
 
     def __repr__(self):
-        return '<Pool(name="{}", number="{}", amount="{}", count="{}")>'. \
-            format(self.name, self.number, self.amount, self.count)
+        return '<Pool(name="{}", number="{}", amount="{}", count="{}", user_id="{}")>'. \
+            format(self.name, self.number, self.amount, self.count, self.user_id)

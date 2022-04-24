@@ -11,13 +11,15 @@ def create_app():
     from .views import home
     from .views import auth
     from .views import account
+    from .views import pools
 
     app.register_blueprint(home, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(account, url_prefix='/')
+    app.register_blueprint(pools, url_prefix='/')
 
     # Import all Database classes here
-    from .models import User
+    from .models import User, Pool
 
     from .db import Base, engine, Session
 
