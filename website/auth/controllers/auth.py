@@ -2,8 +2,8 @@ from flask import render_template, flash, url_for, request, redirect
 from flask_login import login_user, logout_user, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from ..db import Session
-from ..models import User
+from website.db import Session
+from website.models import User
 
 
 def get_login():
@@ -21,12 +21,12 @@ def get_login():
         session.close()
         flash('Incorrect email or/and password.', category='error')
 
-    return render_template('login.html', user=current_user)
+    return render_template('auth/login.html', user=current_user)
 
 
 def get_logout():
     logout_user()
-    return redirect(url_for('auth.login', user=current_user))
+    return redirect(url_for('auth.login'))
 
 
 def get_signup():
@@ -54,4 +54,4 @@ def get_signup():
             session.close()
             flash('User already exists.', category='error')
 
-    return render_template('sign_up.html', user=current_user)
+    return render_template('auth/sign_up.html', user=current_user)

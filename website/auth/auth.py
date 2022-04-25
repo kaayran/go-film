@@ -1,9 +1,9 @@
 from flask import Blueprint
 from flask_login import login_required
 
-from ..controllers import get_login, get_logout, get_signup
+from .controllers import get_login, get_logout, get_signup
 
-auth = Blueprint('auth', __name__)
+auth = Blueprint('auth', __name__, template_folder='templates')
 
 
 @auth.route('/login', methods=['GET', 'POST'])

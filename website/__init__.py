@@ -8,15 +8,15 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = os.environ['SECRET_KEY']
 
-    from .views import home
-    from .views import auth
-    from .views import account
-    from .views import pools
+    from .home import home
+    from .auth import auth
+    from .account import account
+    from .pools import pools
 
     app.register_blueprint(home, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
-    app.register_blueprint(account, url_prefix='/')
-    app.register_blueprint(pools, url_prefix='/')
+    app.register_blueprint(account, url_prefix='/account')
+    app.register_blueprint(pools, url_prefix='/pools')
 
     # Import all Database classes here
     from .models import User, Pool
