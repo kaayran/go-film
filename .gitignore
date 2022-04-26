@@ -11,7 +11,8 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-/website/static/
+/website/static/css/
+/website/static/js/
 build/
 develop-eggs/
 dist/
