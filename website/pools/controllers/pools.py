@@ -15,7 +15,7 @@ def get_pools():
     for pool in pools:
         print(repr(pool))
 
-    return render_template('pools/index.html', user=current_user, pools=pools)
+    return render_template('pools/index.html', pools=pools)
 
 
 def add_pool():
@@ -36,4 +36,4 @@ def add_pool():
 
         return redirect(url_for('home.index'))
 
-    return render_template('pools/create.html', user=current_user)
+    return render_template('pools/create.html')

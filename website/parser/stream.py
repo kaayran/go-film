@@ -4,6 +4,8 @@ import requests
 import json
 import re
 
+from ..models import Film
+
 headers = {
     'X-API-KEY': os.environ['KINOPOISK_API'],
     'Content-Type': 'application/json',
@@ -23,7 +25,25 @@ def get_film_data(film_id):
     data = req.text
     data_json = json.loads(data)
 
-    name = data_json['nameRu']
-    poster = data_json['posterUrl']
+    kinopoisk_id = data_json['kinopoiskId']
+    name_rus = data_json['nameRu']
+    name_original = data_json['nameOriginal']
+    film_url = data_json['webUrl']
+    rating_kinopoisk = data_json['ratingKinopoisk']
+    rating_imdb = data_json['ratingImdb']
+    votes_kinopoisk = data_json['ratingKinopoiskVoteCount']
+    votes_imdb = data_json['ratingImdbVoteCount']
 
-    return name, poster
+    image_url = data_json['posterUrlPreview']
+
+    new_film = Film(kinopoisk_id=kinopoisk_id,
+                    name_rus=name_rus,
+                    name_original=name_original,
+                    url=film_url,
+                    image=image_url,
+                    rating_kinopoisk=rating_kinopoisk,
+                    rating_imdb=rating_imdb,
+                    votes_kinopoisk=votes_kinopoisk,
+                    votes_imdb=votes_imdb)
+
+    return new_film

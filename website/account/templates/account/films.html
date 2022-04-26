@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block title %} Films {% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Rating Kinopoisk</th>
+            <th scope="col">Image</th>
+            <th scope="col">Film URL</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if films %}
+            {% for film in films %}
+                <tr>
+                    <th scope="row">{{ film.kinopoisk_id }}</th>
+                    <td>{{ film.name_original }}</td>
+                    <td>{{ film.rating_kinopoisk }}</td>
+                    <td><img src="{{ film.image }}" alt="" width="180" height="270"></td>
+                    <td>{{ film.url }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <th scope="row">#</th>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+                <td>#</td>
+            </tr>
+        {% endif %}
+
+        </tbody>
+    </table>
+{% endblock %}

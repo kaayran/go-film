@@ -19,7 +19,7 @@ def create_app():
     app.register_blueprint(pools, url_prefix='/pools')
 
     # Import all Database classes here
-    from .models import User, Pool
+    from .models import User, Pool, Film
 
     from .db import Base, engine, Session
 

@@ -1,10 +1,9 @@
-from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String
 
 from ..db import Base
 
 
-class Pool(Base, UserMixin):
+class Pool(Base):
     __tablename__ = 'pools'
 
     id = Column(Integer, primary_key=True)
