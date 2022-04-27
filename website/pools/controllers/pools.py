@@ -37,3 +37,12 @@ def add_pool():
         return redirect(url_for('home.index'))
 
     return render_template('pools/create.html')
+
+
+def get_pool(hash_link):
+    session = Session()
+    pool = session.query(Pool).filter_by(hash_link=hash_link)
+    if hash_link:
+        return render_template('pools/link.html', hash_link, pool=pool)
+
+    return redirect(url_for('home.index'))
