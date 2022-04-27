@@ -28,6 +28,7 @@ def add_pool():
         user_id = user.id
 
         new_pool = Pool(name=name, number=number, amount=amount, count=count, user_id=user_id)
+        new_pool.hash_link = hash(new_pool)
         print(repr(new_pool))
 
         session = Session()
