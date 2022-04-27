@@ -1,7 +1,7 @@
-from flask import Blueprint
+from flask import Blueprint, redirect, url_for
 from flask_login import login_required
 
-from .controllers import get_pools, add_pool
+from .controllers import get_pools, add_pool, get_pool
 
 pools = Blueprint('pools', __name__, template_folder='templates')
 
@@ -16,3 +16,12 @@ def my_pools():
 @login_required
 def create_pool():
     return add_pool()
+
+
+@pools.route('/<hash_link>', methods=['GET'])
+@login_required
+def find_pool(hash_link=None):
+    if hash_link:
+        return get_pool(hash_link)
+
+    return redirect(url_for('home.index'))
