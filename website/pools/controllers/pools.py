@@ -1,4 +1,4 @@
-from flask import render_template, url_for, request, redirect
+from flask import render_template, url_for, request, redirect, flash
 from flask_login import current_user
 
 from website.db import Session
@@ -42,8 +42,10 @@ def add_pool():
 
 def get_pool(hash_link):
     session = Session()
-    pool = session.query(Pool).filter_by(hash_link=hash_link)
-    if hash_link:
-        return render_template('pools/link.html', hash_link, pool=pool)
-
+    pool = session.query(Pool).filter_by(hash_link=hash_link).first()
+    print(repr(pool))
+    if pool:
+        if hash_link:
+            return render_template('pools/link.html', hash_link=hash_link, pool=pool)
+    flash(f'Pool with hash: ({hash_link}) could not found.', category='error')
     return redirect(url_for('home.index'))
