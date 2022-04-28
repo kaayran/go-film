@@ -47,5 +47,5 @@ def get_pool(hash_link):
     if pool:
         if hash_link:
             return render_template('pools/link.html', hash_link=hash_link, pool=pool)
-    flash(f'Pool with hash: ({hash_link}) could not found.', category='error')
+    flash(f'Pool with hash: ({hash_link}) could not be found.', category='error')
     return redirect(url_for('home.index'))
