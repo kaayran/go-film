@@ -9,6 +9,7 @@
             <th scope="col">Members</th>
             <th scope="col">Films per member</th>
             <th scope="col">Minimum votes</th>
+            <th scope="col">Link</th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,11 @@
                     <td>{{ pool.number }}</td>
                     <td>{{ pool.amount }}</td>
                     <td>{{ pool.count }}</td>
+                    <td>
+                        <a href="{{ url_for('pools.link', hash_link=pool.hash_link) }}" class="link-success">
+                            {{ pool.hash_link }}
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
         {% else %}

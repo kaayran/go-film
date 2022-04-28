@@ -8,19 +8,19 @@ pools = Blueprint('pools', __name__, template_folder='templates')
 
 @pools.route('/', methods=['GET'])
 @login_required
-def my_pools():
+def index():
     return get_pools()
 
 
 @pools.route('/create', methods=['GET', 'POST'])
 @login_required
-def create_pool():
+def create():
     return add_pool()
 
 
 @pools.route('/<hash_link>', methods=['GET'])
 @login_required
-def find_pool(hash_link=None):
+def link(hash_link=None):
     if hash_link:
         return get_pool(hash_link)
 

@@ -15,6 +15,8 @@ def get_pools():
     session = Session()
     pools = session.query(Pool).filter_by(user_id=user_id)
 
+    print(url_for('pools.link', hash_link=pools.first().hash_link))
+
     for pool in pools:
         print(repr(pool))
 
