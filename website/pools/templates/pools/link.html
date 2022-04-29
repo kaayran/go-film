@@ -13,7 +13,7 @@
                 {% for f in range(pool.amount) %}
                     <div class="my-1">
                         <select class="form-select" aria-label="Choose your film" name="films" id="films">
-                            <option selected>Film to add</option>
+                            <option value="-1" style="display: none">Film to add</option>
                             {% for film in films %}
                                 <option value="{{ film.id }}">{{ film.name_original }}</option>
                             {% endfor %}
