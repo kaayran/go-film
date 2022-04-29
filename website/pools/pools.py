@@ -18,7 +18,7 @@ def create():
     return add_pool()
 
 
-@pools.route('/<hash_link>', methods=['GET'])
+@pools.route('/<hash_link>', methods=['GET', 'POST'])
 @login_required
 def link(hash_link=None):
     if hash_link:

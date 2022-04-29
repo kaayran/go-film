@@ -1,23 +1,27 @@
-{% extends 'base.html' %} {% block title %} Pool ({{ hash_link }}) {% endblock %}
+{% extends 'base.html' %} {% block title %} Pool (#{{ hash_link }}) {% endblock %}
 
 {% block content %}
     {% for p in range(pool.number) %}
         <div class="my-4">
-            <div class="input-group flex-nowrap">
-                <span class="input-group-text" id="addon-wrapping">Username</span>
-                <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                       aria-describedby="addon-wrapping">
-            </div>
-            {% for f in range(pool.amount) %}
-                <div class="my-1">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Film to add</option>
-                        {% for film in films %}
-                            <option value="{{ film.id }}">{{ film.name_original }}</option>
-                        {% endfor %}
-                    </select>
+            <form method="post">
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text border-dark" id="addon-wrapping">{{ current_user.name }}</span>
+                    <input type="text" class="form-control border-dark" placeholder="Hello, world!"
+                           aria-label="Username"
+                           aria-describedby="addon-wrapping">
                 </div>
-            {% endfor %}
+                {% for f in range(pool.amount) %}
+                    <div class="my-1">
+                        <select class="form-select" aria-label="Choose your film" name="films" id="films">
+                            <option selected>Film to add</option>
+                            {% for film in films %}
+                                <option value="{{ film.id }}">{{ film.name_original }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% endfor %}
+                <button class="btn btn-outline-dark" type="submit">Join</button>
+            </form>
         </div>
     {% endfor %}
 {% endblock %}
