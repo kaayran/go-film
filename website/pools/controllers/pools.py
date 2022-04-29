@@ -54,8 +54,10 @@ def add_pool():
 
 def get_pool(hash_link):
     if request.method == 'POST':
-        selected = request.form.getlist('films')
-        print(str(selected))
+        selected = list(map(int,  request.form.getlist('films')))
+        session = Session()
+        films = (session.query(Film).filter_by(id=film_id).one() for film_id in selected)
+        # get all chosen films from user
 
         return redirect(url_for('pools.index'))
 
